@@ -3,7 +3,6 @@ package com.devsuperior.DSCommerce.entities;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -16,7 +15,7 @@ public class Product {
     private Long id;
     private String name;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(columnDefinition = "TEXT")// informar o BD q terá texto grande
     private String description;
     private Double price;
     private String imgUrl;
@@ -25,7 +24,10 @@ public class Product {
     @JoinTable(name = "tb_product_category",
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
-    private Set<Category> categories = new HashSet<>();
+
+    private Set<Category> categories = new HashSet<>();  //set e nao list, pois informar ao jpa q nao pode repetir
+    @OneToMany(mappedBy = "id.product")
+    private Set<OrderItem> items = new HashSet<>();
 
     public Product() {
     }

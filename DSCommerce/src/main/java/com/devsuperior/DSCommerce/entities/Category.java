@@ -15,7 +15,7 @@ public class Category {
     private Long id;
     private String name;
 
-    @ManyToMany(mappedBy = "categories")
+    @ManyToMany(mappedBy = "categories")//ja foi mapeado o categories na classe Product.java
     private Set<Product> products = new HashSet<>();
 
     public Category() {
