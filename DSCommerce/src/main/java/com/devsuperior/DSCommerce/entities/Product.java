@@ -3,6 +3,7 @@ package com.devsuperior.DSCommerce.entities;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -26,6 +27,7 @@ public class Product {
             inverseJoinColumns = @JoinColumn(name = "category_id"))
 
     private Set<Category> categories = new HashSet<>();  //set e nao list, pois informar ao jpa q nao pode repetir
+
     @OneToMany(mappedBy = "id.product")
     private Set<OrderItem> items = new HashSet<>();
 
@@ -83,6 +85,14 @@ public class Product {
     public Set<Category> getCategories() {
         return categories;
     }
+
+    public Set<OrderItem> getItems() {
+        return items;
+    }
+    public List<Order> getOrders(){
+        return items.stream().map(x->x.getOrder()).toList();
+    }
+
 
     @Override
     public boolean equals(Object o) {
