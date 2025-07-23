@@ -15,8 +15,8 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-
-    @Column(columnDefinition = "TEXT")// informar o BD q terá texto grande
+    
+    @Column(columnDefinition = "TEXT")
     private String description;
     private Double price;
     private String imgUrl;
@@ -25,8 +25,7 @@ public class Product {
     @JoinTable(name = "tb_product_category",
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
-
-    private Set<Category> categories = new HashSet<>();  //set e nao list, pois informar ao jpa q nao pode repetir
+    private Set<Category> categories = new HashSet<>();
 
     @OneToMany(mappedBy = "id.product")
     private Set<OrderItem> items = new HashSet<>();
@@ -89,10 +88,10 @@ public class Product {
     public Set<OrderItem> getItems() {
         return items;
     }
-    public List<Order> getOrders(){
-        return items.stream().map(x->x.getOrder()).toList();
-    }
 
+    public List<Order> getOrders() {
+        return items.stream().map(x -> x.getOrder()).toList();
+    }
 
     @Override
     public boolean equals(Object o) {

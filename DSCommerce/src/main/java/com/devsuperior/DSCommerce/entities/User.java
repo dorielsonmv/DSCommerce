@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Objects;
 
 @Entity
 @Table(name = "tb_user")
@@ -15,10 +15,11 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+
     @Column(unique = true)
     private String email;
     private String phone;
-    private LocalDate birthData;
+    private LocalDate birthDate;
     private String password;
 
     @OneToMany(mappedBy = "client")
@@ -27,12 +28,12 @@ public class User {
     public User() {
     }
 
-    public User(Long id, String name, String email, String phone, LocalDate birthData, String password) {
+    public User(Long id, String name, String email, String phone, LocalDate birthDate, String password) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.phone = phone;
-        this.birthData = birthData;
+        this.birthDate = birthDate;
         this.password = password;
     }
 
@@ -68,12 +69,12 @@ public class User {
         this.phone = phone;
     }
 
-    public LocalDate getBirthData() {
-        return birthData;
+    public LocalDate getBirthDate() {
+        return birthDate;
     }
 
-    public void setBirthData(LocalDate birthData) {
-        this.birthData = birthData;
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
     }
 
     public String getPassword() {
@@ -86,5 +87,20 @@ public class User {
 
     public List<Order> getOrders() {
         return orders;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        return Objects.equals(id, user.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
     }
 }
