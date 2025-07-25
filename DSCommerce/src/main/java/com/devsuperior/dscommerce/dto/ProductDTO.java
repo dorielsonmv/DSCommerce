@@ -22,7 +22,8 @@ public class ProductDTO {
     }
 
     public ProductDTO(Product entity) {
-
+        // uma alternativa automatica seria usar o modelMapper:
+        // https://www.baeldung.com/entity-to-and-from-dto-for-a-java-spring-application
         id = entity.getId();
         name = entity.getName();
         description = entity.getDescription();
