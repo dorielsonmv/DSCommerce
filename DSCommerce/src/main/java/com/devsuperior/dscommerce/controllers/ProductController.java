@@ -19,10 +19,24 @@ public class ProductController {
     private ProductService service;
 
 
+//    @GetMapping(value = "/{id}")
+//    public ResponseEntity<?> findById(@PathVariable Long id) {
+//        try {
+//            ProductDTO dto = service.findById(id);
+//            return ResponseEntity.ok(dto);  //retorna um dto
+//        }
+//        catch (ResourceNotFoundException e){
+//            CustomError err = new CustomError(Instant.now(),404, e.getMessage(), "caminho");
+//            return ResponseEntity.status(404).body(err);
+//        }
+//    }
+
     @GetMapping(value = "/{id}")
     public ResponseEntity<ProductDTO> findById(@PathVariable Long id) {
-        ProductDTO dto  =service.findById(id);
+
+        ProductDTO dto = service.findById(id);
         return ResponseEntity.ok(dto);  //retorna um dto
+
     }
 
     @GetMapping
@@ -41,12 +55,12 @@ public class ProductController {
 
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<ProductDTO> update(@PathVariable Long id, @RequestBody ProductDTO dto ) {
-        dto  =service.update(id,dto);
+    public ResponseEntity<ProductDTO> update(@PathVariable Long id, @RequestBody ProductDTO dto) {
+        dto = service.update(id, dto);
         return ResponseEntity.ok(dto);  //retorna um dto
     }
 
-   @DeleteMapping (value = "/{id}")
+    @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.delete(id);
         return ResponseEntity.noContent().build();  //retorna um dto
