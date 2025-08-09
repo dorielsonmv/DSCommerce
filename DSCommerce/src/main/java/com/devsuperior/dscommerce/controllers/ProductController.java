@@ -41,8 +41,14 @@ public class ProductController {
 
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<ProductDTO> findById(@PathVariable Long id, @RequestBody ProductDTO dto ) {
+    public ResponseEntity<ProductDTO> update(@PathVariable Long id, @RequestBody ProductDTO dto ) {
         dto  =service.update(id,dto);
         return ResponseEntity.ok(dto);  //retorna um dto
+    }
+
+   @DeleteMapping (value = "/{id}")
+    public ResponseEntity<Void> update(@PathVariable Long id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();  //retorna um dto
     }
 }
